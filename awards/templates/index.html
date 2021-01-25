@@ -1,99 +1,39 @@
 {% extends 'base.html' %}
-{% load static%}
-{% block content%}
-<div class="columns">
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://versions.bulma.io/0.7.0/images/placeholders/1280x960.png" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                            <img src="https://versions.bulma.io/0.7.0/images/placeholders/96x96.png"
-                                alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <p class="title is-4">John Smith</p>
-                        <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                </div>
+{% load static %}
+{% block content %}
 
-                <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                </div>
+
+{{ block.super }}
+<div class="container-fluid">
+    <div class="row">
+
+    {% for post in posts %}
+    <div class="col-md-4 mb-4 ">
+        <div class="card">
+
+        <!-- <article class="media content-section"> -->
+            
+            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt="">
+            <!-- <div class="col-md-4"> -->
+            <div class="card-body">
+            
+            
+            <div class="article-metadata">
+                <a class="" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="card-text">{{ post.content }}</p>            
+            <img class="card-img-top" height="100%" width="100%" src= "{{ post.image.url }}" alt="Card image cap">
+            <button class="btn btn-info mb-4" ><a href="{{ post.url }}">visit site</a></button>
+
+            <a href="{% url 'post-detail' post.pk %}">Review project</a>
+
             </div>
         </div>
     </div>
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://versions.bulma.io/0.7.0/images/placeholders/1280x960.png" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                            <img src="https://versions.bulma.io/0.7.0/images/placeholders/96x96.png"
-                                alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <p class="title is-4">John Smith</p>
-                        <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                </div>
 
-                <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://versions.bulma.io/0.7.0/images/placeholders/1280x960.png" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                            <img src="https://versions.bulma.io/0.7.0/images/placeholders/96x96.png"
-                                alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <p class="title is-4">John Smith</p>
-                        <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                </div>
-
-                <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
-{% endblock %}
+{% endblock content %}
